@@ -1,6 +1,8 @@
 package com.example.user_service.controller;
 import com.example.user_service.entity.user;
 import com.example.user_service.service.UserService;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,4 +22,10 @@ public class UserController{
     public List<user> getAll(){
         return service.getAll();
     }
+
+    @GetMapping("/slow")
+    public ResponseEntity<String> slow() throws InterruptedException {
+    Thread.sleep(30000); // simulate hung service
+    return ResponseEntity.ok("done");
+}
  }
